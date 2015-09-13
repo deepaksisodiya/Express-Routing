@@ -13,7 +13,7 @@ app.use('/', function (req, res) {
 
 var adminRouter = express.Router();
 
-// middleware
+// middleware for all /admin routes
 adminRouter.use(function (req, res, next) {
   console.log(req.method, req.url);
   next();
@@ -29,13 +29,18 @@ adminRouter.get('/users', function (req, res) {
 
 var apiRoutes = express.Router();
 
+// middleware for route /api/hello/:name
+apiRoutes.param('name', function (req, res, next, name) {
+  console.log('middleware for /api/hello/:name');
+  next();
+});
 // localhost:3000/api
 apiRoutes.get('/', function (req, res) {
   console.log('mobile API route');
 });
 // localhost:3000/admin/users
-apiRoutes.get('/posts', function (req, res) {
-  console.log('API routes to posts');
+apiRoutes.get('/hello/:name', function (req, res) {
+  console.log('Hello ', req.params.name);
 });
 
 app.use('/api', apiRoutes);
