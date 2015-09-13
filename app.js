@@ -43,6 +43,14 @@ apiRoutes.get('/hello/:name', function (req, res) {
   console.log('Hello ', req.params.name);
 });
 
+app.route('/login')
+.get(function (req, res) {
+    console.log('/login get');
+  })
+.post(function (req, res) {
+  console.log('/ login post');
+});
+
 app.use('/api', apiRoutes);
 app.use('/admin', adminRouter);
 
